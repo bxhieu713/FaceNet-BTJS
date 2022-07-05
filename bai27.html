@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .btn-delete {
+        margin: 5px 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>To Do List</h1>
+    <label for="a">Job: </label>
+    <input type="text" id="job" />
+    <button id="add">ADD</button>
+    <ul id="ul"></ul>
+
+    <script>
+      let inputElement = document.getElementById("job");
+      let ulElement = document.querySelector("ul");
+      let btnAdd = document.querySelector("#add");
+      let jobs = [];
+
+      function renderHtml() {
+        for (let i = 0; i < jobs.length; i++) {
+          let li = document.createElement("li");
+          li.appendChild(document.createTextNode(jobs[i]));
+          let btnDelete = document.createElement("button");
+          li.appendChild(btnDelete);
+          btnDelete.classList.add("btn-delete");
+          btnDelete.innerText = "X";
+          btnDelete.onclick = function () {
+            li.remove();
+            jobs.splice(i, 1);
+          };
+          ulElement.appendChild(li);
+        }
+      }
+
+      btnAdd.onclick = function () {
+        if (inputElement.value.length > 0) {
+          jobs.push(inputElement.value);
+          ulElement.innerHTML = "";
+          renderHtml();
+          inputElement.value = "";
+          inputElement.focus();
+        } else {
+          alert("Job không được để trống");
+        }
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 6: Đăng kí tài khoản gồm Phone theo đúng định dạng gồm 10 số, và password -->
+
+    <label for="name">Nhập số username</label>
+    <input type="text" id="name" />
+    <br />
+    <br />
+    <label for="password">Nhập password</label>
+    <input type="password" id="password" />
+    <br />
+
+    <button onclick="login()">Đăng nhập</button>
+    <br />
+    <span id="success" style="color: green"></span>
+
+    <script>
+      
+      function login() {
+        location.assign("http://facebook.com");
+
+      }
+    </script>
+  </body>
+</html>

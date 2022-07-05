@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập số thứ 1 </label>
+    <input type="text" id="a" />
+    <br />
+
+    <label for="b">Nhập số thứ 2 </label>
+    <input type="text" id="b" />
+    <br />
+    <button onclick="check()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+      function check() {
+        let a = document.getElementById("a").value * 1;
+        let b = document.getElementById("b").value * 1;
+
+        let html = `Tổng 2 số là: ${a+b}`;
+        document.getElementById("temp").innerHTML = html;
+      }
+    </script>
+  </body>
+</html>

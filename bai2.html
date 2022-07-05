@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 2: So sánh ba số tự nhiên xem số nào là số lớn nhất -->
+
+    <label for="a">Nhập số thứ 1</label>
+    <input type="number" id="a" />
+
+    <label for="b">Nhập số thứ 2</label>
+    <input type="number" id="b" />
+
+    <label for="c">Nhập số thứ 3</label>
+    <input type="number" id="c" />
+    <button onclick="compare()">tìm số lớn nhất</button>
+    <div id="max"></div>
+    <script>
+      function compare() {
+        let a = document.getElementById("a").value * 1;
+        let b = document.getElementById("b").value * 1;
+        let c = document.getElementById("c").value * 1;
+
+        let max = a;
+        if (b > max) {
+          max = b;
+        }
+        if (c > max) {
+          max = c;
+        }
+        document.getElementById(
+          "max"
+        ).innerHTML = `<h2>số lớn nhất là ${max}</h2>`;
+      }
+    </script>
+  </body>
+</html>

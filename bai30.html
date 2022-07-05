@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Đăng nhập</h1>
+    <label for="email">Nhập Email: </label>
+    <input type="text" id="email" />
+    <span id="note" style="color: red"></span>
+    <br />
+    <br />
+    <label for="password">Nhập password:  </label>
+    <input type="password" id="password" />
+    <span id="notepass" style="color: red"></span>
+    <br />
+    <br />
+
+    <button onclick="register()">Đăng nhập</button>
+    <br />
+    <span id="success" style="color: green"></span>
+
+    <script>
+      const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
+      function register() {
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if (!validateEmail(email)) {
+          document.getElementById(
+            "note"
+          ).innerHTML = `email không hợp lệ`;
+        } else {
+          document.getElementById("note").innerHTML = "";
+        }
+        if (password.length < 5) {
+          document.getElementById(
+            "notepass"
+          ).innerHTML = `mật khẩu ít hơn 5 ký tự`;
+        } else {
+          document.getElementById("notepass").innerHTML = ``;
+        }
+        if (validateEmail(email) && password.length >= 5) {
+          document.getElementById("success").innerHTML = `Đăng nhập thành công`;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập phần tử trong mảng cách nhau bởi dấu (,): </label>
+    <input type="text" id="a" />
+    <br />
+
+    <button onclick="check()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+      function soChinhPhuong(n) {
+        let a = Math.sqrt(n).toFixed(0);
+        return a*a === n;
+
+      }
+      function check() {
+        let a = document.getElementById("a").value;
+        let arr = a.split(",").map(Number);
+
+        let arrChinhPhuong = arr.filter((value, index) => {
+         return soChinhPhuong(value);
+        })
+
+        if(arrChinhPhuong.length>0) {
+          
+         
+          let html = `Các số chính phương trong mảng là: ${[...new Set(arrChinhPhuong)]} `;
+        document.getElementById("temp").innerHTML = html;
+        } else {
+          let html = `NotFOUND `;
+        document.getElementById("temp").innerHTML = html;
+        }
+
+
+        
+      }
+    </script>
+  </body>
+</html>

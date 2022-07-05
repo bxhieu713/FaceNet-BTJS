@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 5: Giải phương trình bậc nhất ax^2 + bx + c = 0 -->
+
+    <label for="name">Nhập tên</label>
+    <input type="text" id="name">
+
+    <label for="age">Nhập tuổi</label>
+    <input type="number" id="age">
+    <button onclick="writed()">In</button>
+      
+    <script>
+      function writed() {
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        document.write(`${name} - ${age} tuổi`)
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="amount">Nhập số lượng </label>
+    <input type="number" id="amount" />
+    <br />
+    <br />
+
+    <label for="price">Nhập đơn giá </label>
+    <input type="number" id="price" onKeyUp="myFunction()" />
+    <br />
+    <br />
+
+    <label for="money">Thành tiền </label>
+    <input type="number" readonly id="money" />
+    <br />
+    <br />
+    <script>
+      let amountElement = document.getElementById("amount");
+      let priceElement = document.getElementById("price");
+      let moneyElement = document.getElementById("money");
+
+      function myFunction() {
+        moneyElement.value = priceElement.value * amount.value;
+      }
+    </script>
+  </body>
+</html>

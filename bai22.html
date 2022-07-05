@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập chuỗi là các số: </label>
+    <input type="text" id="a" />
+    <br />
+
+    <button onclick="check()">Result</button>
+    <div id="temp"></div>
+    <script>
+      function check() {
+        let a = document.getElementById("a").value * 1;
+        if (a % 1 === 0) {
+          let html = `Chuỗi trên đều là số.`;
+          document.getElementById("temp").innerHTML = html;
+        } else {
+          let html = `Chuỗi trên chứa ký tự không là số.`;
+          document.getElementById("temp").innerHTML = html;
+        }
+      }
+    </script>
+  </body>
+</html>

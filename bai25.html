@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập số n: </label>
+    <input type="number" id="a" />
+    <br />
+
+    
+    <button onclick="check()">Result</button>
+    <div id="temp"></div>
+    <script>
+      function check() {
+        let a = document.getElementById("a").value * 1;
+
+        let total = 1;
+        for (let index = 1; index <= a; index++) {
+            total*=index;
+        }
+        let html = `${a}! = ${total}`;
+        document.getElementById("temp").innerHTML = html;
+      }
+    </script>
+  </body>
+</html>

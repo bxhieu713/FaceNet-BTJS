@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập phần tử trong mảng cách nhau bởi dấu (,): </label>
+    <input type="text" id="a" />
+    <br />
+
+    <button onclick="check()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+      function IsPrime(n) {
+        if (n < 2) return false;
+        for (let i = 2; i <= Math.sqrt(n); i++) {
+          if (n % i == 0) {
+            return false;
+          }
+        }
+        return true;
+      }
+      function check() {
+        let a = document.getElementById("a").value;
+        let arr = a.split(",").map(Number);
+
+        let arrPrime = arr.filter((value, index) => {
+         return IsPrime(value);
+        })
+
+        if(arrPrime.length>0) {
+          
+          let total = arrPrime.reduce((a, b) => a + b);
+  
+          let tbc = total / arrPrime.length;
+          let html = `Trung bình cộng các số nguyên tố là: ${tbc} `;
+        document.getElementById("temp").innerHTML = html;
+        } else {
+          let html = `NotFOUND `;
+        document.getElementById("temp").innerHTML = html;
+        }
+
+
+        
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập phần tử trong mảng cách nhau bởi dấu (,): </label>
+    <input type="text" id="a" />
+    <br />
+
+    <button onclick="check()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+     
+      function check() {
+        let a = document.getElementById("a").value;
+        let arr = a.split(",").map(Number);
+
+        let arrAsc = arr.sort()
+
+          let html = `Mảng được sắp xếp tăng dần là: ${arrAsc}`;
+        document.getElementById("temp").innerHTML = html;
+        
+      }
+    </script>
+  </body>
+</html>

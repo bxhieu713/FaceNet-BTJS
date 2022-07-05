@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 5: Giải phương trình bậc nhất ax^2 + bx + c = 0 -->
+
+    <div id="result"></div>
+    <script>
+      let a = prompt("Nhập a:");
+      let b = prompt("Nhập b");
+      let c = prompt("Nhập c");
+
+      let delta = b * b - 4 * a * c;
+      if (a == 0) {
+        if (b == 0) {
+          if (c == 0) {
+            document.write("Phương trình có vô số nghiệm");
+          } else {
+            document.write(`Phương trình vô nghiệm`);
+          }
+        } else {
+          document.write("x = " + -c / b);
+        }
+      } else if (delta > 0) {
+        document.write(`x1 = ` + (-b + Math.sqrt(delta)) / (2 * a));
+        document.write(`<br>`);
+        document.write(`x2 = ` + (-b - Math.sqrt(delta)) / (2 * a));
+      }else if (delta == 0) {
+        document.write(`phương trình có nghiệm kép x1 = x2 = ` + (-b) / (2 * a));
+        
+      }
+       else  {
+        document.write(`Phương trình vô nghiệm`);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <label for="a">Nhập số thứ 1</label>
+    <input type="number" id="a" />
+<br>
+    <label for="b">Nhập số thứ 2</label>
+    <input type="number" id="b" />
+<br>
+    <label for="c">Nhập số thứ 3</label>
+    <input type="number" id="c" />
+    <button onclick="istriangle()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+      function istriangle() {
+        let a = document.getElementById("a").value * 1;
+        let b = document.getElementById("b").value * 1;
+        let c = document.getElementById("c").value * 1;
+
+        if (a + b > c && a + c > b && b + c > a) {
+          let p = (a + b + c) / 2;
+          let s = Math.sqrt(p * (p - a) * (p - b) * (p - c)).toFixed(2);
+          document.getElementById(
+            "temp"
+          ).innerHTML = `<h2>Diện tích tam giác là ${s} (dvdt^2)</h2>`;
+        } else {
+          document.getElementById(
+            "temp"
+          ).innerHTML = `<h2>Không là 3 cạnh của tam giác</h2>`;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>Stopwatch</h1>
+    <span class="timer"
+      ><span id="minutes">00</span>:<span id="seconds">00</span>:<span
+        id="hundreds"
+        >00</span
+      ></span
+    >
+    <div class="button-container">
+      <button id="start-btn">Start</button>
+      <button id="stop-btn">Stop</button>
+      <button id="reset-btn">Reset</button>
+    </div>
+
+    <script>
+      const startBtn = document.querySelector("#start-btn");
+      const stopBtn = document.querySelector("#stop-btn");
+      const resetBtn = document.querySelector("#reset-btn");
+      const secondsElement = document.querySelector("#seconds");
+      const minutesElement = document.querySelector("#minutes");
+      const hundredsElement = document.querySelector("#hundreds");
+
+      let interval;
+      let hundreds = 0;
+      let seconds = 0;
+      let minutes = 0;
+
+      startBtn.addEventListener("click", (event) => {
+        clearInterval(interval);
+
+        // lặp lại sau mỗi tích tắc
+        interval = setInterval(() => {
+          hundreds++;
+          if (hundreds <= 9) {
+            hundredsElement.innerText = "0" + hundreds;
+          } else {
+            hundredsElement.innerText = hundreds;
+          }
+
+          // nếu hơn 100 thì sec + 1
+          if (hundreds > 99) {
+            hundredsElement.innerText = "00";
+            hundreds = 0;
+            seconds++;
+          }
+
+          if (seconds <= 9) {
+            secondsElement.innerText = "0" + seconds;
+          } else {
+            secondsElement.innerText = seconds;
+          }
+
+          if (seconds > 59) {
+            secondsElement.innerText = "00";
+            seconds = 0;
+            minutes++;
+          }
+
+          if (minutes <= 9) {
+            minutesElement.innerText = "0" + minutes;
+          } else {
+            minutesElement.innerText = minutes;
+          }
+        }, 10);
+      });
+
+      stopBtn.addEventListener("click", (event) => {
+        clearInterval(interval);
+      });
+
+      resetBtn.addEventListener("click", (event) => {
+        clearInterval(interval);
+        minutes = 0;
+        seconds = 0;
+        hundreds = 0;
+        minutesElement.innerText = "00";
+        secondsElement.innerText = "00";
+        hundredsElement.innerText = "00";
+      });
+    </script>
+  </body>
+</html>

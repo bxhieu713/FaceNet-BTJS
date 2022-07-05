@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <label for="hours">Nhập giờ</label>
+    <input type="number" id="hours">
+    <button onclick="convert()">Chuyển đổi sang phút</button>
+    <div id="minutes"></div>
+    <script>
+
+        let hours = document.getElementById("hours")
+        function convert() {
+            let minutes = hours.value * 60;
+            document.getElementById("minutes").innerHTML = `<h2>${minutes} phút</h2>`
+        }
+
+    </script>
+</body>
+</html>

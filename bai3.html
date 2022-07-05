@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 3: Tìm số tự nhiên chẵn lớn nhất  -->
+
+    <label for="a">Nhập
+    <script>
+      let arr = [1,22,3,5,8,10,33];
+
+      let max = arr[1];
+      arr.forEach(element => {
+        if(element%2===0 && element > max){
+          max = element;
+        }
+      });
+
+      console.log(max);
+    </script>
+  </body>
+</html>

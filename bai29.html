@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập chuỗi </label>
+    <input type="text" id="a" />
+    <br />
+
+    <label for="b">Nhập số ký tự </label>
+    <input type="text" id="b" />
+    <br />
+    <button onclick="check()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+      function check() {
+        let a = document.getElementById("a").value; ;
+        let b = document.getElementById("b").value ;
+        let count = 0;
+        for (let i = 0; i < a.length; i++) {
+          if(a.charAt(i).toLowerCase()===b.toLowerCase()) {
+            count ++;
+          }
+          
+        }
+        let html = `số lần xuất hiện của ${b} là: ${count}`;
+        document.getElementById("temp").innerHTML = html;
+      }
+    </script>
+  </body>
+</html>

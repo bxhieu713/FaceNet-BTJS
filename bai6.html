@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 6: Đăng kí tài khoản gồm Phone theo đúng định dạng gồm 10 số, và password -->
+
+    <label for="phone">Nhập số điện thoại</label>
+    <input type="text" id="phone" />
+    <span id="note" style="color: red"></span>
+    <br />
+    <br />
+    <label for="password">Nhập password</label>
+    <input type="password" id="password" />
+    <span id="notepass" style="color: red"></span>
+    <br />
+
+    <button onclick="register()">Đăng ký</button>
+    <br />
+    <span id="success" style="color: green"></span>
+
+    <script>
+      function telephoneCheck(str) {
+        var isphone =
+          /^(1\s|1|)?((\(\d{3}\))|\d{3})(\-|\s)?(\d{3})(\-|\s)?(\d{4})$/.test(
+            str
+          );
+        return isphone;
+      }
+      function register() {
+        let phone = document.getElementById("phone").value;
+        let password = document.getElementById("password").value;
+
+        if (!telephoneCheck(phone)) {
+          document.getElementById(
+            "note"
+          ).innerHTML = `số điện thoại không hợp lệ`;
+        } else {
+          document.getElementById("note").innerHTML = "";
+        }
+        if (password.length == 0) {
+          document.getElementById("notepass").innerHTML = `chưa nhập mất khẩu`;
+        } else {
+          document.getElementById("notepass").innerHTML = ``;
+        }
+        if (telephoneCheck(phone) && password.length > 0) {
+          document.getElementById("success").innerHTML = `Đăng ký thành công`;
+        }
+      }
+    </script>
+  </body>
+</html>

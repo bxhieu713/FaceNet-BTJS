@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 10: Nhập tên và năm sinh , rồi tính tuổi của người đó. Năm sinh phải nhỏ hơn hoặc hiện tại -->
+
+    <label for="name">Nhập tên</label>
+    <input type="text" id="name" />
+<br>
+    <label for="year">Nhập năm sinh</label>
+    <input type="number" id="year" />
+    <span id="note"></span>
+    <br>
+    <button onclick="writed()">In</button>
+
+    <script>
+      function writed() {
+        let name = document.getElementById("name").value;
+        let year = document.getElementById("year").value * 1;
+        // console.log(new Date().getFullYear() - year);
+        let age = new Date().getFullYear() - year;
+        if (age < 0) {
+          document.getElementById("note").innerHTML = "Năm sinh không hợp lệ";
+        } else {
+          document.write(`${name} - ${age} tuổi`);
+        }
+      }
+    </script>
+  </body>
+</html>

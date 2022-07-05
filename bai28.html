@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="a">Nhập chuỗi </label>
+    <input type="text" onkeyup="check()" id="a" />
+    <br />
+
+    <script>
+      function check() {
+        let a = document.getElementById("a").value; 
+        a = a.replace(/\s+/g," ").toLowerCase();  
+        a= a.charAt(0).toUpperCase() + a.slice(1);  
+        document.getElementById("a").value = a;
+      }
+
+      
+    </script>
+  </body>
+</html>

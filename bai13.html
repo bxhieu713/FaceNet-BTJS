@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Bài 2: So sánh ba số tự nhiên xem số nào là số lớn nhất -->
+
+    <label for="a">Nhập số phút điện thoại: </label>
+    <input type="number" id="a" />
+    <br />
+
+    <button onclick="check()">Kiểm tra</button>
+    <div id="temp"></div>
+    <script>
+      function check() {
+        let a = document.getElementById("a").value * 1;
+        if (0 <= a && a <= 50) {
+          let fee = 2500 + 600 * a;
+          document.getElementById(
+            "temp"
+          ).innerHTML = `Cước điện thoại cho ${a} phút là ${fee} đồng`;
+        } else if (a > 50) {
+          let fee = 2500 + 600 * 50 + (a - 50) * 400;
+          document.getElementById(
+            "temp"
+          ).innerHTML = `Cước điện thoại cho ${a} phút là ${fee} đồng`;
+        } else {
+          document.getElementById(
+            "temp"
+          ).innerHTML = `Cước điện thoại không hợp lệ`;
+        }
+      }
+    </script>
+  </body>
+</html>
