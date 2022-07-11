@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 40%;
+        text-align: center;
+        background-color: orange;
+        padding: 20px;
+        margin: auto;
+        min-height: 50vh;
+      }
+
+      #ul {
+        width: 80%;
+        margin: auto;
+        list-style-type: circle;
+      }
+      #ul li {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To Do List</h1>
+      <label for="job">Add a new todo:</label>
+      <input id="job" type="text" />
+      <button id="add">Add</button>
+    <h2>Danh sách công việc:</h2>
+      <ul id="ul"></ul>
+    </div>
+
+    <script>
+      let jobs = [];
+      let ulElement = document.querySelector("ul");
+      let addbtn = document.querySelector("#add");
+      let inputElement = document.querySelector("#job");
+      console.log(jobs);
+
+      const renderJobs = () => {
+        for (let i = 0; i < jobs.length; i++) {
+          const element = jobs[i];
+          let liElement = document.createElement("li");
+          liElement.setAttribute("id", i);
+          liElement.appendChild(document.createTextNode(element));
+
+          let deleteBtn = document.createElement("button");
+          deleteBtn.innerText = "X";
+          liElement.appendChild(deleteBtn);
+          ulElement.appendChild(liElement);
+        }
+      };
+
+      //   Remove jobs
+      ulElement.addEventListener("click", (e) => {
+        ulElement.innerHTML = "";
+        if (e.target.localName === "button") {
+          e.target.parentElement.remove();
+          let index = e.target.parentElement.id;
+          console.log(e.target.parentElement.id);
+          jobs.splice(index, 1);
+        }
+        renderJobs();
+      });
+
+      //   Add jobs
+      addbtn.addEventListener("click", () => {
+        if (inputElement.value.length > 0) {
+          jobs.push(inputElement.value);
+          ulElement.innerHTML = "";
+          renderJobs();
+          inputElement.value = "";
+          inputElement.focus();
+        }
+      });
+    </script>
+  </body>
+</html>

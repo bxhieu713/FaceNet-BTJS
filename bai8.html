@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      table td {
+        border: 1px solid #ccc;
+      }
+
+      table {
+        margin: 20px;
+        padding: 30px 0px;
+        background-color: #ccc;
+        text-align: center;
+      }
+
+      th {
+        min-width: 40px;
+      }
+      .td-pre-month {
+        color: gray;
+      }
+      
+
+      .td-next-month {
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="date">Nhập tháng, năm: </label>
+
+    <input type="month" id="date" name="date" min="1000-01" value="2022-07" />
+    <br />
+
+    <button onclick="display()">Hiển thị lịch</button>
+    <div id="calendar"></div>
+
+    <script>
+      let calendar = document.getElementById("calendar");
+
+      function display() {
+        let input = document.getElementById("date").value;
+        let date = new Date(input);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        calendar.innerHTML = ``
+        calendar.appendChild(showCalendar(year, month));
+      }
+
+      function daysInMonth(month, year) {
+        return new Date(year, month, 0).getDate();
+      }
+
+      const weekday = [
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thur",
+        "Fri",
+        "Sat",
+        "Sun",
+      ];
+      function showCalendar(year, month) {
+        let preMonth = daysInMonth(month - 1, year);
+        let thisMonth = daysInMonth(month, year);
+
+        let d = new Date(year, month - 1, 01, 1).getDay();
+        let day = weekday[d];
+        let table = document.createElement("table");
+
+        let date = 1;
+        let th = ``;
+        let trs = ``;
+
+        for (let i = 0; i <= 6; i++) {
+          th += `<th>${weekday[i]}</th>`;
+        }
+
+        let n = 1;
+        for (let i = 0; i <= 5; i++) {
+          let td = ``;
+          for (let j = 0; j <= 6; j++) {
+            if (i === 0 && j < d - 1) {
+              td += `<td class= "td-pre-month">${preMonth + j - d + 2}</td>`;
+            } else if (i === 0 && j >= d - 1) {
+              td += `<td class= "td-this-month">${date++}</td>`;
+            } else if (i > 0 && i <= 5 && date <= thisMonth) {
+              td += `<td class= "td-this-month">${date++}</td>`;
+            } else if (i >= 4 && i <= 5 && date > thisMonth) {
+              td += `<td class="td-next-month">${n++}</td>`;
+            }
+          }
+          trs += `<tr>${td}</tr>`;
+        }
+        table.innerHTML = `<caption>My Calendar</caption>`;
+
+        table.innerHTML += `<tr>${th}</tr>`;
+        table.innerHTML += trs;
+        return table;
+      }
+    </script>
+  </body>
+</html>

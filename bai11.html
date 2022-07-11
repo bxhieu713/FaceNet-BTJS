@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="input1">Input 1: </label>
+    <input
+      type="text"
+      id="input1"
+      size="60"
+      style="text-overflow: ellipsis"
+      value="SV001, Nguyễn Văn A; SV003, Phạm Văn C; SV006, Nguyễn Văn D"
+    />
+    <br />
+
+    <label for="input2">Input 2: </label>
+    <input
+      type="text"
+      id="input2"
+      size="60"
+      style="text-overflow: ellipsis"
+      value="SV001,Hà Nội; SV009, Đà nẵng; SV003, Thái Bình; SV005, Cần thơ"
+    />
+    <br />
+    <br />
+
+    <button onclick="check()">check</button>
+    <br />
+    <br />
+
+    <div id="main"></div>
+
+    <script>
+      let main = document.querySelector("#main");
+      function check() {
+        let input1 = document.getElementById("input1").value;
+        let input2 = document.getElementById("input2").value;
+
+        let arrInput1 = input1.split(";");
+        let arrInput2 = input2.split(";");
+
+        let info1 = arrInput1.map(function (value, index) {
+          let arrInfo1 = value.split(",");
+          return {
+            msv: arrInfo1[0].trim(),
+            name: arrInfo1[1].trim(),
+          };
+        });
+        let info2 = arrInput2.map(function (value, index) {
+          let arrInfo2 = value.split(",");
+          return {
+            msv: arrInfo2[0].trim(),
+            address: arrInfo2[1].trim(),
+          };
+        });
+
+        // console.log([...info1, ...info2]);
+        // console.log([...new Set([...info1, ...info2])]);
+
+        // So khớp 2 dữ liệu đầu vào để hiển thị dữ liệu theo các dòng
+        let result1 = info1
+          .filter(function (o1) {
+            return info2.some(function (o2) {
+              return o1.msv === o2.msv;
+            });
+          })
+          .map(function (value, index) {
+            return {
+              ...value,
+              address: info2.find(function (o2) {
+                return o2.msv === value.msv;
+              }).address,
+            };
+          });
+
+        // hiển thị ra màn hình
+        let html = result1
+          .map(function (value) {
+            return `
+            <li>${value.msv}, ${value.name}, ${value.address}</li>
+            `;
+          })
+          .join("");
+        main.innerHTML = `
+            Danh sách sinh viên khớp 2 bảng là là:
+            <ul>${html}</ul>
+          `;
+
+        console.log(result1);
+
+        //  2. Hiển thị tổng số sinh viên và danh sách sinh viên có ở Input 2 mà ko có ở Input 1
+        let result2 = info2
+          .filter(function (o1) {
+            return !info1.some(function (o2) {
+              return o1.msv === o2.msv;
+            });
+          })
+          .sort(function (a, b) {
+            return a.msv > b.msv ? 1 : -1;
+          });
+
+        let html2 = result2
+          .map(function (value) {
+            return `
+            <li>${value.msv}, ${value.address}</li>
+            `;
+          })
+          .join("");
+        main.innerHTML += `
+            Có ${result2.length} sinh viên có ở input2 nhưng không có ở input 1 là:
+            <ul>${html2}</ul>
+          `;
+
+        console.log(result2);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Chọn sở thích</h1>
+    <div id="main"></div>
+    <br>
+    <button onclick="lookup()">Xem danh sách</button>
+    <ol id="ul"></ol>
+    <script>
+      let listsCheckbox = [
+        {
+          title: "Xem phim",
+          checked: true,
+        },
+        {
+          title: "Đá bóng",
+          checked: true,
+        },
+        {
+          title: "Ngủ",
+          checked: false,
+        },
+        {
+          title: "Chơi Game",
+          checked: false,
+        },
+      ];
+      let main = document.querySelector("#main");
+
+      function renderCheckbox(listsCheckbox) {
+        let htmls = ``;
+        for (let i = 0; i < listsCheckbox.length; i++) {
+          let check = listsCheckbox[i];
+          let ischeck = check.checked ? "checked" : "";
+          let checkInput = document.createElement("input");
+          let labelInput = document.createElement("label");
+          checkInput.setAttribute("type", "checkbox");
+          checkInput.setAttribute("id", `habit-${i}`);
+          labelInput.setAttribute("for", `habit-${i}`);
+          labelInput.innerHTML = check.title;
+          checkInput.checked = check.checked;
+          main.appendChild(checkInput);
+          main.appendChild(labelInput);
+          main.appendChild(document.createElement("br"));
+        }
+
+        // main.innerHTML = htmls;
+      }
+
+      renderCheckbox(listsCheckbox);
+
+      var checkbox = document.querySelectorAll("input");
+
+      function lookup() {
+        var checkbox = document.querySelectorAll("input");
+
+        let ul = document.querySelector("#ul");
+
+        let htmls = ``;
+        for (let i = 0; i < checkbox.length; i++) {
+          if (checkbox[i].checked) {
+            let html = ` <li>${listsCheckbox[i].title}</li>`;
+            htmls += html;
+          }
+        }
+        ul.innerHTML = htmls;
+      }
+    </script>
+  </body>
+</html>

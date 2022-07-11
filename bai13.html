@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      #root > h1 {
+        margin: auto;
+      }
+      #submit {
+        text-align: center;
+        margin: 10px;
+        /* position: fixed;
+        top: 0;
+        right: 0; */
+        background-color: #ccc;
+      }
+
+      .answer-correct {
+        color: green;
+      }
+
+      .answer-incorrect {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root">
+      <h1>QuizApp</h1>
+      <div id="score" style="display: none"></div>
+
+      <div id="container"></div>
+      <button id="submit">Hoàn thành</button>
+    </div>
+    <script>
+      // Bài 13: tạo 1 quizapp gồm 10 câu hỏi trắc nghiệm, câu trả lời
+      // hiện kết quả chung và hiện đáp án cho tất cả hỏi khi hoàn thành quiz
+
+      let quizzes = [
+        {
+          id: 1,
+          question: "Đây là đâu và đâu là đây?",
+          answers: [
+            {
+              content: "A. Thái Bình",
+              isAnswer: true,
+            },
+            {
+              content: "B. Hà Nội",
+              isAnswer: false,
+            },
+            {
+              content: "C. Thanh Hoá",
+              isAnswer: false,
+            },
+            {
+              content: "D. Hải Phòng",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "Một cộng một bằng mấy ?",
+          answers: [
+            {
+              content: "A. 3",
+              isAnswer: false,
+            },
+            {
+              content: "B. 1",
+              isAnswer: false,
+            },
+            {
+              content: "C. 2",
+              isAnswer: false,
+            },
+            {
+              content: "D. bằng 1 + 1",
+              isAnswer: true,
+            },
+          ],
+        },
+        {
+          id: 3,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: false,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: true,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+        {
+          id: 2,
+          question: "JavaScript là ngôn ngữ xử lý ở?",
+          answers: [
+            {
+              content: "A. Client",
+              isAnswer: true,
+            },
+            {
+              content: "B. Server",
+              isAnswer: false,
+            },
+            {
+              content: "C. Server/client",
+              isAnswer: false,
+            },
+            {
+              content: "D. Không có dạng nào",
+              isAnswer: false,
+            },
+          ],
+        },
+      ];
+
+      let container = document.querySelector("#container");
+      let submitBtn = document.querySelector("#submit");
+      let scoreElement = document.querySelector("#score");
+
+      function showQuestion() {
+        for (var i = 0; i < quizzes.length; i++) {
+          let question = `
+            <div class="question-container">
+                <h2>Câu ${i + 1}, ${quizzes[i].question}</h2>
+            </div>
+            `;
+          let answers = ``;
+          for (let index = 0; index < quizzes[i].answers.length; index++) {
+            answers += `<div class="answer">
+                <input type="radio" value="${quizzes[i].answers[index].isAnswer}" class ="answer-input" id="option-${i}-${index}" name="option-${i}" class="radio" " />
+                <label for="option-${i}-${index}" class="option" id="option-${i}-${index}-label">${quizzes[i].answers[index].content}</label>
+                </label>
+            </div>`;
+          }
+          container.innerHTML += `
+            ${question}
+            ${answers}
+        `;
+        }
+      }
+      showQuestion();
+
+      let score = 0;
+      submitBtn.onclick = function (event) {
+        if (confirm("Bạn muốn kết thúc bài làm?") === true) {
+          for (let i = 0; i < quizzes.length; i++) {
+            const options = document.getElementsByName(`option-${i}`);
+
+            let locationAnswer;
+
+            for (let index = 0; index < options.length; index++) {
+              if (options[index].value === "true") {
+                locationAnswer = index;
+              }
+            }
+            for (let index = 0; index < options.length; index++) {
+              if (
+                options[index].checked === true &&
+                options[index].value === "true"
+              ) {
+                score++;
+                document
+                  .getElementById(`option-${i}-${index}-label`)
+                  .classList.add("answer-correct");
+              } else if (
+                options[index].checked === true &&
+                options[index].value === "false"
+              ) {
+                document
+                  .getElementById(`option-${i}-${index}-label`)
+                  .classList.add("answer-incorrect");
+                document
+                  .getElementById(`option-${i}-${locationAnswer}-label`)
+                  .classList.add("answer-correct");
+              } else {
+                document
+                  .getElementById(`option-${i}-${locationAnswer}-label`)
+                  .classList.add("answer-correct");
+              }
+
+              // Vô hiệu hoá input khi hoàn thành
+              submitBtn.style.display = "none";
+              document.getElementById(
+                `option-${i}-${index}-label`
+              ).disabled = true;
+              document.getElementById(`option-${i}-${index}`).disabled = true;
+              document.querySelectorAll(
+                `.answer input[type=radio]`
+              ).disabled = true;
+            }
+          }
+          scoreElement.innerHTML = `<h2 style="color:green">Điểm của bạn là: ${score}/${quizzes.length}</h2>`;
+          scoreElement.style.display = "block";
+          console.log(score);
+        }
+      };
+    </script>
+  </body>
+</html>

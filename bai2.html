@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .container {
+            width: 40%;
+            text-align: center;
+            background-color: orange;   
+            padding: 20px;
+            margin: auto;
+        }
+
+        .timer  {
+            font-size: 40px;
+        }
+
+        .button-container button {
+            margin-top: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <h1>Stopwatch</h1>
+        <span class="timer"
+          ><span id="minutes">00</span>:<span id="seconds">00</span>:<span
+            id="hundreds"
+            >00</span
+          ></span
+        >
+        <div class="button-container">
+          <button id="start-btn">Start</button>
+          <button id="stop-btn">Stop</button>
+          <button id="reset-btn">Reset</button>
+        </div>
+    </div>
+    
+
+    <script>
+      let startBtn = document.querySelector("#start-btn");
+      let stopBtn = document.querySelector("#stop-btn");
+      let resetBtn = document.querySelector("#reset-btn");
+      let minutesElement = document.querySelector("#minutes");
+      let secondsElement = document.querySelector("#seconds");
+      let hundredsElement = document.querySelector("#hundreds");
+
+      let interval;
+      let minutes = 0;
+      let seconds = 0;
+      let hundreds = 0;
+
+      startBtn.addEventListener("click", () => {
+        clearInterval(interval);
+        interval = setInterval(() => {
+          hundreds++;
+          if (hundreds <= 9) {
+            hundredsElement.innerText = `0${hundreds}`;
+          } else {
+            hundredsElement.innerText = `${hundreds}`;
+          }
+
+          if (hundreds > 99) {
+            hundredsElement.innerText = "00";
+            hundreds = 0;
+            seconds++;
+          }
+
+          if (seconds <= 9) {
+            secondsElement.innerText = `0${seconds}`;
+          } else {
+            secondsElement.innerText = `${seconds}`;
+          }
+
+          if (seconds > 59) {
+            secondsElement.innerText = "00";
+            seconds = 0;
+            minutes++;
+          }
+
+          if (minutes <= 9) {
+            minutesElement.innerText = `0${minutes}`;
+          } else {
+            minutesElement.innerText = `${minutes}`;
+          }
+        }, 10);
+      });
+
+      stopBtn.addEventListener("click", (e) => {
+        clearInterval(interval);
+      });
+
+      resetBtn.addEventListener("click", (e) => {
+        clearInterval(interval);
+        minutes = 0;
+        seconds = 0;
+        hundreds = 0;
+        minutesElement.innerText = "00";
+        secondsElement.innerText = "00";
+        hundredsElement.innerText = "00";
+      });
+    </script>
+  </body>
+</html>

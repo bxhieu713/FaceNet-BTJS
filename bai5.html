@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="n">Nhập n lớn hơn 0: </label>
+    <input id="n" name="n" type="text" />
+    <br>
+    <button onclick="check()">Check</button>
+
+    <div class="temp"></div>
+    <script>
+
+
+        function check() {
+        let n = document.getElementById("n").value * 1;
+
+            let total = 0
+            for(let i = 1; i <= n; i++) {
+                total += i/n;
+            }
+
+            document.querySelector(".temp").innerHTML = `Tổng biểu thức 1/${n} + 2/${n} + ... + ${n}/${n} là: ${total}`;
+        }
+
+    </script>
+  </body>
+</html>

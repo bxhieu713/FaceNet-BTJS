@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Game kéo búa bao (chơi với máy)</h1>
+    <button id="start">Bắt đầu</button>
+
+    <div id="human" style="display: none">
+      <h4>Bạn muốn chọn:</h4>
+
+      <input type="radio" name="game" id="keo" checked />
+      <label for="keo">Kéo</label>
+      <input type="radio" name="game" id="bua" />
+      <label for="bua">Búa</label>
+      <input type="radio" name="game" id="bao" />
+      <label for="bao">Bao</label>
+    </div>
+    <div id="time"></div>
+    <div id="machine"></div>
+
+    <div id="result"></div>
+    <br>
+    <button id="replay" style="display: none">Chơi lại</button>
+
+    <script>
+      const humanContainer = document.getElementById("human");
+      const startBtn = document.getElementById("start");
+      const replayBtn = document.getElementById("replay");
+      const machine = document.getElementById("machine");
+      const result = document.getElementById("result");
+
+      let arr = ["Kéo", "Bao", "Búa"];
+      let arr2 = ["keo", "bao", "bua"];
+      let time = 3000;
+    
+      startBtn.onclick = () => {
+        humanContainer.style.display = "block";
+        startBtn.style.visibility = "hidden";
+      
+       ;
+        let myTimeout = setTimeout(() => {
+            let humanResult = document.querySelector(
+          'input[name="game"]:checked'
+        ).id;
+          let random = Math.floor(Math.random() * 3);
+
+          let machineResult = arr2[random];
+
+          machine.innerHTML = `<h4>Máy chọn: ${arr[random]}</h4>`;
+
+          let htmlResult;
+          switch (handleResult(humanResult, machineResult)) {
+            case 0:
+              htmlResult = `Hoà nhau`;
+              break;
+            case 1:
+              htmlResult = `Bạn đã thắng`;
+              break;
+            case -1:
+              htmlResult = `Bạn đã thua`;
+              break;
+
+            default:
+              break;
+          }
+
+          result.innerHTML = `<h2>${htmlResult}</h2>`;
+          replayBtn.style.display = "block"
+        }, time);
+
+        replayBtn.onclick =()=> {
+            startBtn.click()
+            result.innerHTML = ``
+            machine.innerHTML = ``
+            };
+      };
+
+      function handleResult(human, machine) {
+        if (human === machine) {
+          return 0;
+        } else if (
+          (human === "bua" && machine === "keo") ||
+          (human === "keo" && machine === "bao") ||
+          (human === "bao" && machine === "bua")
+        ) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }
+    </script>
+  </body>
+</html>

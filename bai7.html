@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+    <style>
+      #main {
+        width: 40%;
+        margin: auto;
+        background-color: rgb(222, 206, 206);
+        padding: 2rem;
+      }
+
+      #main h1 {
+        text-align: center;
+      }
+
+      #main input {
+        font-size: 1rem;
+      }
+
+      #main label {
+        font-size: 1.1rem;
+        display: inline-block;
+        width: 23%;
+      }
+      .event {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .event h2 {
+        width: 60%;
+      }
+
+      .event h4 {
+        width: 20%;
+      }
+
+      #add {
+        margin-left: 1rem;
+        cursor: pointer;
+        background-color: rgb(208, 181, 181);
+      }
+
+      @media screen and (max-width: 900px) {
+        #main {
+          width: 70%;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        #main {
+          width: 80%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>My Events</h1>
+      <label for="input_name">Event Name:</label>
+      <input type="text" id="input_name" name="event" placeholder="Event..." />
+      <br />
+      <br />
+      <label for="input_time">Time :</label>
+      <input type="date" id="input_time" name="time" placeholder="Time..." />
+
+      <button id="add">Add</button>
+      <br />
+      <br />
+      <div id="container"></div>
+    </div>
+
+    <script>
+      // B7. Xây dựng chương trình đếm ngược sự kiện,
+      // hiển thị danh sách các sự kiện kèm số ngày đếm ngược,
+      // gồm các chức năng thêm sửa xóa
+
+      const inputNameElement = document.getElementById("input_name");
+      const inputTimeElement = document.getElementById("input_time");
+      const btnAdd = document.getElementById("add");
+      const containerEvent = document.getElementById("container");
+
+      let eventsOld = JSON.parse(localStorage.getItem("events"));
+
+      //   update time:
+      let events = eventsOld.map(function (value) {
+        let date1 = new Date(value.time);
+        let date2 = new Date();
+        let difference = date1.getTime() - date2.getTime();
+        let countdown = Math.ceil(difference / (1000 * 3600 * 24));
+        return {
+          id: value.id,
+          eventName: value.eventName,
+          time: value.time,
+          countdown: countdown,
+        };
+      });
+      console.log(events);
+
+      // render display
+      function renderEvents() {
+        for (let i = 0; i < events.length; i++) {
+          const event = events[i];
+
+          let divEvent = document.createElement("div");
+          divEvent.setAttribute("class", "event");
+          divEvent.setAttribute("id", `${i}`);
+
+          let textElement = document.createElement("h2");
+          textElement.innerText = event.eventName;
+
+          let timeElement = document.createElement("h4");
+          let timeText;
+          if (event.countdown >= 0) {
+            timeText = "còn " + event.countdown + " ngày";
+          } else {
+            timeText = `đã qua ${event.countdown * -1} ngày`;
+          }
+          timeElement.innerText = timeText;
+
+          let btnDelete = document.createElement("button");
+          btnDelete.innerText = "Delete";
+
+          let btnEdit = document.createElement("button");
+          btnEdit.innerText = "Edit";
+
+          divEvent.appendChild(textElement);
+          divEvent.appendChild(timeElement);
+          divEvent.appendChild(btnDelete);
+          divEvent.appendChild(btnEdit);
+
+          containerEvent.appendChild(divEvent);
+        }
+      }
+
+      renderEvents();
+
+      //remove event:
+      containerEvent.addEventListener("click", (e) => {
+        containerEvent.innerHTML = "";
+        if (
+          e.target.innerText === "Delete" &&
+          confirm("Bạn có muốn xoá sự kiện này ???") == true
+        ) {
+          e.target.parentElement.remove();
+          let index = e.target.parentElement.id;
+          //   console.log(e.target.parentElement.id);
+          events.splice(index, 1);
+          localStorage.setItem(`events`, JSON.stringify(events));
+        }
+        renderEvents();
+      });
+
+      //Edit event:
+      containerEvent.addEventListener("click", (e) => {
+        // containerEvent.innerHTML = "";
+        if (e.target.innerText === "Edit") {
+          let index = e.target.parentElement.id;
+          inputNameElement.value = events[index].eventName;
+          inputTimeElement.value = events[index].time;
+          events.splice(index, 1);
+          localStorage.setItem(`events`, JSON.stringify(events));
+        }
+        // renderEvents();
+      });
+
+      //add event
+      btnAdd.onclick = () => {
+        let name = inputNameElement.value;
+
+        let time = inputTimeElement.value;
+
+        let date1 = new Date(time);
+        let date2 = new Date();
+        let difference = date1.getTime() - date2.getTime();
+        let countdown = Math.ceil(difference / (1000 * 3600 * 24));
+
+        if (name && countdown) {
+          let id = (Math.random() * 100).toFixed(0);
+
+          let newEvent = {
+            id: id,
+            eventName: inputNameElement.value,
+            time: inputTimeElement.value,
+            countdown: countdown,
+          };
+          
+          events.push(newEvent);
+
+          localStorage.setItem(`events`, JSON.stringify(events));
+
+          containerEvent.innerHTML = ``;
+          renderEvents();
+          inputNameElement.focus();
+          inputNameElement.value = "";
+          inputTimeElement.value = "";
+        }
+      };
+    </script>
+  </body>
+</html>

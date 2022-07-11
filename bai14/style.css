@@ -1,0 +1,60 @@
+body {
+    background-color: #efb03b;
+
+}
+h1{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(var(--col), 1fr);
+
+}
+
+.card {
+    position: relative;
+    transition: all .4s linear;
+    transform-style: preserve-3d;
+    margin: 5px;
+    text-align: center;
+
+}
+
+.card,
+.back,
+.front {
+    height: 150px;
+    width: 150px;
+}
+
+.back,
+.front {
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.front {
+    z-index: 2;
+    background: #5072d6 no-repeat center center / contain;
+}
+
+.back {
+    transform: rotateY(180deg);
+    background-color: #efb03b;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.selected {
+    transform: rotateY(180deg);
+}
+
+.match .front {
+    background: #efb03b !important;
+
+}
